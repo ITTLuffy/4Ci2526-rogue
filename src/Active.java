@@ -5,7 +5,9 @@ public class Active extends Item {
 
 
     // MAX_CHARGE COME PARAMETRO???
-    public Active(int chargeLevel) {
+
+    public Active(int chargeLevel, int damageMod, int fireMod) {
+        super(damageMod, fireMod);
         this.chargeLevel = chargeLevel;
     }
 
