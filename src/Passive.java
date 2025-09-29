@@ -1,8 +1,7 @@
 public class Passive extends Item {
 
-    public Passive() {
-        super(0, 0);
+    public Passive(String name, double damageMod, double fireMod) {
+        super(name, damageMod, fireMod);
     }
-
     
 }

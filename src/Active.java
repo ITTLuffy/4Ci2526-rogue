@@ -5,16 +5,21 @@
 
 public class Active extends Item {
 
-    protected int chargeLevel;
-    protected final int MAX_CHARGE = 20;
+    int chargeLevel;
+    final int MAX_CHARGE;
 
-    public Active(int chargeLevel, double damageMod, double fireMod) {
-        super(damageMod, fireMod); // costruttore item
-        this.chargeLevel = chargeLevel;
+    public Active(int maxCharge, String name, double damageMod, double fireMod) {
+        super(name, damageMod, fireMod); // costruttore item
+        MAX_CHARGE = maxCharge;
+        chargeLevel = maxCharge;
     }
 
     public boolean isLoaded() { // stato di carica
-        return chargeLevel > 0;
+        return chargeLevel == MAX_CHARGE;
+    }
+
+    public void reload() {
+        chargeLevel = MAX_CHARGE;
     }
 
 }
