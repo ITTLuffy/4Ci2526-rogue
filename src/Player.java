@@ -40,7 +40,7 @@ public class Player {
             finalFireRate *= p.getFireMod();
         }
 
-        if (active != null) {
+        if (active != null && active.isLoaded()) {
             finalDamage *= active.getDamageMod();
             finalFireRate *= active.getFireMod();
         }
@@ -49,11 +49,35 @@ public class Player {
             finalDamage *= trinket.getDamageMod();
             finalFireRate *= trinket.getFireMod();
         }
-
-
     }
 
+    public void viewStats() {
+        System.out.println("Hp" + hp);
+        System.out.println("finalDamage " + finalDamage);
+        System.out.println("finalFireRate " + finalFireRate);
+    }
 
+    public void addItem(Item nuovo) {
+        if (nuovo instanceof Passive)
+            passive.add((Passive)nuovo);
+        else if(nuovo instanceof Active)
+            active = (Active)nuovo;
+        else if(nuovo instanceof Trinket)
+            trinket = (Trinket)nuovo;
+    }
 
+    public void dropTrinket() {
+        trinket = null;
+    }
+
+    public boolean checkCollectibles() {
+        for (int i = 0; i < collectibles.size(); i++) { // NON POSSO USARE IL FOR EACH
+            if (collectibles.get(i) instanceof Trinket) {
+                collectibles.remove(i);
+                i--;
+            }
+        }
+        return true;
+    }
 
 }
