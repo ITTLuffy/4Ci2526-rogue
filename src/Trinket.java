@@ -1,10 +1,11 @@
 
 public class Trinket extends Item implements Collectible {
 
-    public Trinket() {
-        super(0.0, 0.0);
+    
+    public Trinket(String name, double damageMod, double fireMod) {
+        super(name, damageMod, fireMod);
     }
-
+    
     @Override
     public boolean canDropped() {
         return true; // Solo i Trinket possono essere droppati

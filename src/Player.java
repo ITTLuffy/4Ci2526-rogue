@@ -12,15 +12,25 @@ public class Player {
     private Trinket trinket;
     private ArrayList<Collectible> collectibles;
     private int hp;
-    private final int HP_MAX = 100; // Costante come richiesto
+    private final int HP_MAX;
     private double baseDamage, finalDamage, baseFireRate, finalFireRate;
 
     public Player(int hp, double baseDamage, double baseFireRate) {
-        this.hp = hp;
+        this.hp = this.HP_MAX = hp;
         this.baseDamage = baseDamage;
         this.baseFireRate = baseFireRate;
-        this.finalDamage = baseDamage;
-        this.finalFireRate = baseFireRate;
+        passive = new ArrayList<>();
+        collectibles = new ArrayList<>();
     }
+
+    public double getFinalDamage() {
+        return finalDamage;
+    }
+
+    public double getFinalFireRate() {
+        return finalFireRate;
+    }
+
+
 
 }

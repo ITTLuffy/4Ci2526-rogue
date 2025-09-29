@@ -1,3 +1,5 @@
 public interface Collectible {
-    public abstract boolean canDropped();
+
+    public boolean canDropped();
+
 }
