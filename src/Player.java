@@ -87,12 +87,13 @@ public class Player {
     }
 
     /**
-     * 0
-+
+     * - boolean ricarica( ), che ripristina la carica massima dell'oggetto Active consumando una Battery nell'inventario, 
+     * a patto che ci sia, rimuovendola. Restituisce false se non è stato possibile effettuare la ricarica.
      * @return
      */
-    public boolean ricarica() {
+    public boolean ricarica() { // l'avrei fatto con contains considerando che tutte le batterie erano le stesse
         boolean trovato = false;
+
         for (int i = collectibles.size() - 1; i >= 0; i--){
             Collectible c = collectibles.get(i);
 
@@ -108,26 +109,27 @@ public class Player {
     }
 
     public boolean cura() {
-        Collectible cuore = new Heart();
-        if (!collectibles.contains(cuore))
-            return false;
+        boolean curato = false;
+        int delta = HP_MAX - hp;
 
-        int i = 0;
-        int scarto = 0;
-        for (Collectible c : collectibles) {
-            if (c instanceof Heart)
-                i++;
+        if (delta == 0) return false; // curato
+
+        int i = collectibles.size() - 1;
+        while (delta > 0 && i >= 0) {
+            Collectible c = collectibles.get(i);
+            if (c instanceof Heart) {
+                collectibles.remove(c);
+                hp++; // aggiorno i punti vita 
+                delta--;
+
+                curato = true;
+
+                i--;
+            }
+
         }
-        scarto = i;
-        while (hp < HP_MAX && scarto > 0) {
-            hp += 1;
-            scarto--;
-        }
-        i = i - scarto; // quanti Heart ho aggiunto
 
-        int counter = 0;
-
-        return true;
+        return curato;
 
     }
 
