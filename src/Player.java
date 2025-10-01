@@ -112,7 +112,7 @@ public class Player {
         boolean curato = false;
         int delta = HP_MAX - hp;
 
-        if (delta == 0) return false; // curato
+        if (hp <= 0 || delta == 0) return false; // curato
 
         int i = collectibles.size() - 1;
         while (delta > 0 && i >= 0) {
