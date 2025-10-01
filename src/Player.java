@@ -82,7 +82,53 @@ public class Player {
                 trovati = true;
             }
         }
+        // collectibles.removeIf(t -> t instanceof Trinket)
         return trovati;
+    }
+
+    /**
+     * 0
++
+     * @return
+     */
+    public boolean ricarica() {
+        boolean trovato = false;
+        for (int i = collectibles.size() - 1; i >= 0; i--){
+            Collectible c = collectibles.get(i);
+
+            if (c instanceof Battery) {
+                collectibles.remove(c);
+                trovato = true;
+                this.active.reload();
+                break;
+            }
+        }
+        
+        return trovato;
+    }
+
+    public boolean cura() {
+        Collectible cuore = new Heart();
+        if (!collectibles.contains(cuore))
+            return false;
+
+        int i = 0;
+        int scarto = 0;
+        for (Collectible c : collectibles) {
+            if (c instanceof Heart)
+                i++;
+        }
+        scarto = i;
+        while (hp < HP_MAX && scarto > 0) {
+            hp += 1;
+            scarto--;
+        }
+        i = i - scarto; // quanti Heart ho aggiunto
+
+        int counter = 0;
+
+        return true;
+
     }
 
 }
