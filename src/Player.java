@@ -45,39 +45,44 @@ public class Player {
             finalFireRate *= active.getFireMod();
         }
 
-        if (trinket != null) {
+        if (trinket != null) { // bisogna controllare le istanze
             finalDamage *= trinket.getDamageMod();
             finalFireRate *= trinket.getFireMod();
         }
     }
 
     public void viewStats() {
-        System.out.println("Hp" + hp);
-        System.out.println("finalDamage " + finalDamage);
-        System.out.println("finalFireRate " + finalFireRate);
+        System.out.printf("Hp: %d, danno corrente %.2f, fire rate: %.2f \n", hp, finalDamage, finalFireRate);
     }
 
     public void addItem(Item nuovo) {
         if (nuovo instanceof Passive)
             passive.add((Passive)nuovo);
         else if(nuovo instanceof Active)
-            active = (Active)nuovo;
+            this.active = (Active)nuovo;
         else if(nuovo instanceof Trinket)
-            trinket = (Trinket)nuovo;
+            this.trinket = (Trinket)nuovo;
     }
 
-    public void dropTrinket() {
-        trinket = null;
+    public Trinket dropTrinket() {
+        if (this.trinket == null) return null;
+
+        Trinket temp = this.trinket;
+        this.trinket = null;
+        return temp;
     }
 
     public boolean checkCollectibles() {
-        for (int i = 0; i < collectibles.size(); i++) { // NON POSSO USARE IL FOR EACH
+        boolean trovati = false;
+
+        for (int i = collectibles.size() - 1; i >= 0; i--) { // NON POSSO USARE IL FOR EACH
+            
             if (collectibles.get(i) instanceof Trinket) {
                 collectibles.remove(i);
-                i--;
+                trovati = true;
             }
         }
-        return true;
+        return trovati;
     }
 
 }
